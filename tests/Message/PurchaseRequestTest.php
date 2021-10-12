@@ -12,16 +12,16 @@ class PurchaseRequestTest extends TestCase
      */
     private $request;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
     }
 
-    public function testGetDataWithoutCard()
+    public function testGetDataWithoutCard(): void
     {
-        $this->request->initialize(array(
+        $this->request->initialize([
             'pspId' => 'testPspId',
             'language' => 'en_US',
             'shaIn' => 'MyShaInSecret',
@@ -32,9 +32,9 @@ class PurchaseRequestTest extends TestCase
             'returnUrl' => 'https://www.example.com/return',
             'cancelUrl' => 'https://www.example.com/cancel',
             'title' => 'My shop title'
-        ));
+        ]);
 
-        $expected = array(
+        $expected = [
             'PSPID' => 'testPspId',
             'LANGUAGE' => 'en_US',
             // Currency has to be converted to integer, so 12.00 becomes 1200
@@ -50,14 +50,14 @@ class PurchaseRequestTest extends TestCase
             'DECLINEURL' => null,
             'OPERATION' => null,
             'TITLE' => 'My shop title'
-        );
+        ];
 
         $this->assertEquals($expected, $this->request->getData());
     }
 
-    public function testGetDataWithCard()
+    public function testGetDataWithCard(): void
     {
-        $this->request->initialize(array(
+        $this->request->initialize([
             'pspId' => 'testPspId',
             'language' => 'en_US',
             'shaIn' => 'MyShaInSecret',
@@ -67,9 +67,9 @@ class PurchaseRequestTest extends TestCase
             'description' => 'Order Description',
             'returnUrl' => 'https://www.example.com/return',
             'cancelUrl' => 'https://www.example.com/cancel'
-        ));
+        ]);
 
-        $card = new CreditCard(array(
+        $card = new CreditCard([
             'name' => 'Hans Muster',
             'address1' => 'Teststrasse 123',
             'address2' => 'Postfach 321',
@@ -78,10 +78,10 @@ class PurchaseRequestTest extends TestCase
             'postcode' => '3000',
             'phone' => '098 765 43 21',
             'email' => 'test@test.ch',
-        ));
+        ]);
         $this->request->setCard($card);
 
-        $expected = array(
+        $expected = [
             'PSPID' => 'testPspId',
             'LANGUAGE' => 'en_US',
             // Currency has to be converted to integer, so 12.00 becomes 1200
@@ -105,9 +105,8 @@ class PurchaseRequestTest extends TestCase
             'OWNERTOWN' => 'Bern',
             'OWNERCTY' => 'CH',
             'OWNERTELNO' => '098 765 43 21'
-        );
+        ];
 
         $this->assertEquals($expected, $this->request->getData());
     }
-
 }

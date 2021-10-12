@@ -7,7 +7,7 @@ use Omnipay\Common\Exception\InvalidResponseException;
 class CompletePurchaseRequest extends AbstractRequest
 {
     // parameters that will be included in the SHA-OUT Hash
-    protected $signatureParams = array(
+    protected $signatureParams = [
         'AAVADDRESS',
         'AAVCHECK',
         'AAVMAIL',
@@ -71,17 +71,17 @@ class CompletePurchaseRequest extends AbstractRequest
         'TRXDATE',
         'VC',
         'WALLET'
-    );
+    ];
 
     public function getData()
     {
-        $data = array();
+        $data = [];
         foreach ($this->httpRequest->query as $key => $value) {
             $data[strtoupper($key)] = $value;
         }
 
         if (isset($data['SHASIGN'])) {
-            $signData = array();
+            $signData = [];
             foreach ($this->signatureParams as $param) {
                 if (isset($data[$param])) {
                     $signData[$param] = $data[$param];

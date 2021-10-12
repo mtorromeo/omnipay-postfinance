@@ -45,7 +45,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     {
         // Build the post data as expected by Postfinance.
         $params = $this->getData();
-        $postData = array();
+        $postData = [];
         foreach ($params as $key => $value) {
             $postData[$key] = $value;
         }

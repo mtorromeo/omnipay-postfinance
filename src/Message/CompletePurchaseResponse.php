@@ -11,12 +11,12 @@ use Omnipay\Postfinance\Gateway;
 class CompletePurchaseResponse extends AbstractResponse
 {
 
-    protected $validStates = array(
+    protected $validStates = [
         Helper::POSTFINANCE_PAYMENT_REQUESTED,
         Helper::POSTFINANCE_PAYMENT_PROCESSING,
         Helper::POSTFINANCE_AUTHORIZED,
         Helper::POSTFINANCE_AUTHORIZED_WAITING
-    );
+    ];
 
     public function isSuccessful()
     {

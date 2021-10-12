@@ -6,7 +6,7 @@ use Omnipay\Common\CreditCard;
 
 class PurchaseRequest extends AbstractRequest
 {
-    protected $optionalParams = array(
+    protected $optionalParams = [
         'tp',
         'title',
         'bgColor',
@@ -20,19 +20,19 @@ class PurchaseRequest extends AbstractRequest
         'logo',
         'fontType',
         'hdFontType'
-    );
+    ];
 
     public function getData()
     {
         $this->validate('pspId', 'transactionId', 'amount', 'currency', 'language');
 
-        $data = array(
+        $data = [
             'PSPID'     => $this->getPspId(),
             'ORDERID'   => $this->getTransactionId(),
             'AMOUNT'    => $this->getAmountInteger(),
             'CURRENCY'  => $this->getCurrency(),
             'LANGUAGE'  => $this->getLanguage()
-        );
+        ];
 
         foreach ($this->optionalParams as $param) {
             $value = Helper::stringValue($this->getParameter($param));

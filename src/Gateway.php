@@ -17,15 +17,15 @@ class Gateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-        return array(
+        return [
             // general params
             'pspId'             => '',
             'shaIn'             => '',
             'shaOut'            => '',
             'operation'         => '',
             'testMode'          => false,
-            'hashingMethod'     => array('sha1', 'sha256', 'sha512'),
-            'encoding'          => array('ISO-8859-1', 'UTF-8'),
+            'hashingMethod'     => ['sha1', 'sha256', 'sha512'],
+            'encoding'          => ['ISO-8859-1', 'UTF-8'],
             'language'          => '', // ISO Language code
 
             // template parameters
@@ -42,7 +42,7 @@ class Gateway extends AbstractGateway
             'logo'              => '',
             'fontType'          => '',
             'hdFontType'        => '' // iPhone template only
-        );
+        ];
     }
 
     /**
@@ -444,7 +444,7 @@ class Gateway extends AbstractGateway
      * @param array $parameters array of options
      * @return \Omnipay\Postfinance\Message\PurchaseRequest
      */
-    public function purchase(array $parameters = array())
+    public function purchase(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Postfinance\Message\PurchaseRequest', $parameters);
     }
@@ -455,7 +455,7 @@ class Gateway extends AbstractGateway
      * @param array $parameters
      * @return \Omnipay\Postfinance\Message\CompletePurchaseRequest
      */
-    public function completePurchase(array $parameters = array())
+    public function completePurchase(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Postfinance\Message\CompletePurchaseRequest', $parameters);
     }
@@ -466,7 +466,7 @@ class Gateway extends AbstractGateway
      * @param array $parameters
      * @return \Omnipay\Postfinance\Message\AuthorizeRequest
      */
-    public function authorize(array $parameters = array())
+    public function authorize(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Postfinance\Message\AuthorizeRequest', $parameters);
     }
@@ -477,7 +477,7 @@ class Gateway extends AbstractGateway
      * @param array $parameters
      * @return \Omnipay\Postfinance\Message\CompleteAuthorizeRequest
      */
-    public function completeAuthorize(array $parameters = array())
+    public function completeAuthorize(array $parameters = [])
     {
         return $this->completePurchase($parameters);
     }

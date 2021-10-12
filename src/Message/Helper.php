@@ -69,7 +69,7 @@ class Helper
     {
         uksort($data, 'strnatcasecmp');
 
-        $hashParts = array();
+        $hashParts = [];
         foreach ($data as $key => $value) {
             $str = self::stringValue($value);
             if ($str == '' || $key == 'SHASIGN') {
